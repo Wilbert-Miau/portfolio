@@ -1,0 +1,125 @@
+---
+const navItems = [
+  { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Contact', href: '#contact' },
+];
+---
+
+<nav class="navbar">
+  <div class="container navbar-content">
+    <a href="#" class="logo">
+      Wilbert<span class="text-accent">.</span>
+    </a>
+
+    <button class="mobile-menu-btn" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <ul class="nav-links">
+      {navItems.map(item => (
+        <li>
+          <a href={item.href}>{item.name}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+
+  .logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  .nav-links a:hover {
+    color: #fff;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .bar {
+    width: 25px;
+    height: 2px;
+    background-color: #fff;
+    transition: 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      display: flex;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: var(--color-surface);
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 0;
+      gap: 1.5rem;
+      transform: translateY(-150%);
+      transition: transform 0.3s ease-in-out;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-links.active {
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const mobileBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+
+  mobileBtn?.addEventListener('click', () => {
+    navLinks?.classList.toggle('active');
+  });
+</script>

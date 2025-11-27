@@ -1,0 +1,114 @@
+---
+---
+
+<section class="hero">
+  <div class="container hero-content">
+    <div class="badge">Available for new opportunities</div>
+    <h1>
+      Backend & Infrastructure <br />
+      <span class="text-accent">Developer</span>
+    </h1>
+    <p class="subtitle">
+      Building robust, scalable systems with C# .NET, Python, and Modern DevOps.
+      Specialized in event-driven architecture and self-hosted solutions.
+    </p>
+    <div class="cta-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-secondary">Contact Me</a>
+    </div>
+  </div>
+  
+  <div class="background-glow"></div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 70px; /* Navbar height */
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--color-accent);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #2563eb; /* Darker blue */
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .background-glow {
+    position: absolute;
+    top: 50%;
+    right: -10%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
