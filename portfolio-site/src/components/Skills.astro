@@ -1,37 +1,66 @@
 ---
 const skills = {
+  platform: [
+    "Docker & Containerization",
+    "MinIO Object Storage",
+    "Caddy Reverse Proxy",
+    "Self-hosted GitHub Actions",
+    "Linux Servers"
+  ],
+  realtime: [
+    "Asterisk/Issabel VoIP (PBX)",
+    "MediaMTX Streaming",
+    "SignalR WebSockets",
+    "RabbitMQ Message Broker"
+  ],
   backend: [
     "C# .NET APIs",
-    "FastAPI (Python)",
-    "SQL Server",
-    "RabbitMQ",
-    "SignalR",
-    "Legacy System Integration",
-    "VB.NET Maintenance"
+    "Python / FastAPI",
+    "SQL Server Optimization",
+    "Event-Driven Architecture",
+    "Legacy Integration"
   ],
-  infrastructure: [
-    "Docker & Compose",
-    "Linux Servers",
-    "Caddy Reverse Proxy",
-    "GitHub Actions (CI/CD)",
-    "MinIO Object Storage",
-    "Background Workers",
-    "Self-hosted Deployments"
+  monitoring: [
+    "Sentry Error Tracking",
+    "FortiGate Security",
+    "Samsung Knox MDM"
   ],
-  frontend: [
-    "Angular",
-    "HTML/CSS",
-    "JavaScript/TypeScript"
+  management: [
+    "Customer Orientation",
+    "Strategic Planning",
+    "Long-term Vision",
+    "Business Growth",
+    "Team Leadership"
   ]
 };
 ---
 
 <section id="skills" class="section">
   <div class="container">
-    <h2 class="section-title">Technical Skills</h2>
+    <h2 class="section-title">Skills & Expertise</h2>
     
     <div class="skills-grid">
-      <!-- Backend -->
+      <!-- Platform Services -->
+      <div class="skill-category">
+        <h3>Platform Services</h3>
+        <div class="skill-list">
+          {skills.platform.map(skill => (
+            <div class="skill-tag">{skill}</div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Real-Time Systems -->
+      <div class="skill-category">
+        <h3>Real-Time Systems</h3>
+        <div class="skill-list">
+          {skills.realtime.map(skill => (
+            <div class="skill-tag">{skill}</div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Backend Development -->
       <div class="skill-category">
         <h3>Backend Development</h3>
         <div class="skill-list">
@@ -41,21 +70,21 @@ const skills = {
         </div>
       </div>
 
-      <!-- Infrastructure -->
+      <!-- Monitoring & Security -->
       <div class="skill-category">
-        <h3>Infrastructure & DevOps</h3>
+        <h3>Monitoring & Security</h3>
         <div class="skill-list">
-          {skills.infrastructure.map(skill => (
+          {skills.monitoring.map(skill => (
             <div class="skill-tag">{skill}</div>
           ))}
         </div>
       </div>
 
-      <!-- Frontend -->
-      <div class="skill-category">
-        <h3>Frontend & Full Stack</h3>
+      <!-- Management -->
+      <div class="skill-category highlight">
+        <h3>Management & Soft Skills</h3>
         <div class="skill-list">
-          {skills.frontend.map(skill => (
+          {skills.management.map(skill => (
             <div class="skill-tag">{skill}</div>
           ))}
         </div>
@@ -100,6 +129,11 @@ const skills = {
   .skill-category:hover {
     transform: translateY(-5px);
     border-color: var(--color-accent);
+  }
+
+  .skill-category.highlight {
+    background: linear-gradient(145deg, var(--color-surface), rgba(59, 130, 246, 0.05));
+    border-color: rgba(59, 130, 246, 0.2);
   }
 
   .skill-category h3 {
