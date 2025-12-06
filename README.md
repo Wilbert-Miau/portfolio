@@ -6,6 +6,9 @@ I used:
 * Amazon S3 for static file hosting
 * Amazon CloudFront as CDN
 * Cloudflare as DNS
+
+
+
 <a href="https://www.wilbertcastillo.com/" target="_blank">Portfolio</a>
 
 Why this setup?
@@ -13,3 +16,6 @@ Why this setup?
 🔒 Private S3 bucket secured with Origin Access Control
 🔁 Zero-downtime automatic deployments
 📦 Lightweight and maintainable Astro codebase
+
+
+I want to imporve this, adding diagrams and videos of some projects that I worked on.
