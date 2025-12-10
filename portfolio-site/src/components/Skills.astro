@@ -39,6 +39,15 @@ const skills = {
     "Adaptability"
   ]
 };
+
+// Skills to highlight with special styling
+const highlightedSkills = [
+  "SQL Server Optimization",
+  "Linux Servers",
+  "C# .NET APIs"
+];
+
+const isHighlighted = (skill: string) => highlightedSkills.includes(skill);
 ---
 
 <section id="skills" class="section">
@@ -51,7 +60,7 @@ const skills = {
         <h3>Platform Services</h3>
         <div class="skill-list">
           {skills.platform.map(skill => (
-            <div class="skill-tag">{skill}</div>
+            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
           ))}
         </div>
       </div>
@@ -61,7 +70,7 @@ const skills = {
         <h3>Cloud Platforms</h3>
         <div class="skill-list">
           {skills.cloud.map(skill => (
-            <div class="skill-tag">{skill}</div>
+            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
           ))}
         </div>
       </div>
@@ -71,7 +80,7 @@ const skills = {
         <h3>Streaming & Messaging</h3>
         <div class="skill-list">
           {skills.integration.map(skill => (
-            <div class="skill-tag">{skill}</div>
+            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
           ))}
         </div>
       </div>
@@ -81,7 +90,7 @@ const skills = {
         <h3>Backend Development</h3>
         <div class="skill-list">
           {skills.backend.map(skill => (
-            <div class="skill-tag">{skill}</div>
+            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
           ))}
         </div>
       </div>
@@ -91,7 +100,7 @@ const skills = {
         <h3>Monitoring & Security</h3>
         <div class="skill-list">
           {skills.monitoring.map(skill => (
-            <div class="skill-tag">{skill}</div>
+            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
           ))}
         </div>
       </div>
@@ -101,7 +110,7 @@ const skills = {
         <h3>Management & Soft Skills</h3>
         <div class="skill-list">
           {skills.management.map(skill => (
-            <div class="skill-tag">{skill}</div>
+            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
           ))}
         </div>
       </div>
@@ -171,5 +180,14 @@ const skills = {
     font-size: 0.9rem;
     color: var(--color-text);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .skill-tag.highlighted {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+    border-color: rgba(59, 130, 246, 0.5);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+    font-weight: 500;
   }
 </style>
