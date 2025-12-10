@@ -68,14 +68,16 @@ import heroImage from '../assets/images/hero.jpg';
 
   .image-frame {
     position: relative;
-    width: 320px;
-    height: 320px;
+    width: 380px;
+    height: auto;
+    aspect-ratio: 1;
     border-radius: 20px;
     overflow: hidden;
     border: 2px solid var(--color-border);
     box-shadow: 
       0 25px 50px -12px rgba(0, 0, 0, 0.5),
       0 0 0 1px rgba(59, 130, 246, 0.1);
+    background: rgba(10, 10, 20, 0.5);
   }
 
   .image-frame::before {
@@ -91,12 +93,12 @@ import heroImage from '../assets/images/hero.jpg';
   .image-frame img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.3s ease;
   }
 
   .image-frame:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 
   @media (max-width: 900px) {
@@ -111,8 +113,7 @@ import heroImage from '../assets/images/hero.jpg';
     }
 
     .image-frame {
-      width: 250px;
-      height: 250px;
+      width: 280px;
     }
 
     .cta-group {
@@ -168,31 +169,33 @@ import heroImage from '../assets/images/hero.jpg';
   }
 
   .btn-primary:hover {
-    background: #2563eb; /* Darker blue */
+    background: #2563eb;
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
   }
 
   .btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
   }
 
   .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(59, 130, 246, 0.1);
     transform: translateY(-2px);
   }
 
   .btn-download {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--color-accent);
+    border: 1px solid rgba(59, 130, 246, 0.3);
     gap: 0.5rem;
   }
 
   .btn-download:hover {
-    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    background: rgba(59, 130, 246, 0.25);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
   }
 
   .btn-download svg {
