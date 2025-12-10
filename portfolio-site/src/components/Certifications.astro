@@ -1,11 +1,11 @@
 ---
-// Logo URLs for certification issuers
+// Logo URLs for certification issuers - using reliable sources
 const issuerLogos: Record<string, string> = {
-  "Johns Hopkins University": "https://brand.jhu.edu/assets/uploads/sites/5/2014/06/university.logo_.small_.vertical.blue_.png",
-  "University of California, Irvine": "https://brand.uci.edu/wp-content/uploads/2022/11/UCI-logo-mark.png",
-  "Packt": "https://static.packt-cdn.com/assets/images/favicon.png",
-  "Coursera": "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera.s3.amazonaws.com/media/coursera-logo-square.png",
-  "EF SET": "https://www.efset.org/favicon-32x32.png"
+  "Johns Hopkins University": "https://www.jhu.edu/assets/themes/jhu/assets/images/icons/favicon-32x32.png",
+  "University of California, Irvine": "https://www.uci.edu/favicon-32x32.png",
+  "Packt": "https://www.packtpub.com/favicon.ico",
+  "Coursera": "https://www.coursera.org/apple-touch-icon.png",
+  "EF SET": "https://www.efset.org/apple-touch-icon.png"
 };
 
 const certs = [
@@ -70,12 +70,16 @@ const certs = [
           <div class="cert-header">
             <h3>{cert.title}</h3>
             <div class="issuer-row">
-              <img 
-                src={issuerLogos[cert.issuer]} 
-                alt={`${cert.issuer} logo`} 
-                class="issuer-logo"
-                loading="lazy"
-              />
+              <div class="issuer-logo-wrapper">
+                <img 
+                  src={issuerLogos[cert.issuer]} 
+                  alt={`${cert.issuer} logo`} 
+                  class="issuer-logo"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <span class="issuer-logo-fallback" style="display: none;">{cert.issuer.charAt(0)}</span>
+              </div>
               <span class="issuer">{cert.issuer}</span>
             </div>
           </div>
@@ -155,6 +159,10 @@ const certs = [
     margin-bottom: 1.5rem;
   }
 
+  .issuer-logo-wrapper {
+    flex-shrink: 0;
+  }
+
   .issuer-logo {
     width: 28px;
     height: 28px;
@@ -162,7 +170,19 @@ const certs = [
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
     padding: 3px;
-    flex-shrink: 0;
+  }
+
+  .issuer-logo-fallback {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: var(--color-accent, #3b82f6);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .issuer {
