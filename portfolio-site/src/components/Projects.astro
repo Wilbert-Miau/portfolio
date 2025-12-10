@@ -2,18 +2,21 @@
 const projects = [
   {
     title: "Comprehensive Administrative Platform",
+    problem: "The company needed to shift from simple financial control to generating digital experiences to increase sales. Legacy systems failed to meet specific modern needs, such as real-time management of digital signage.",
     description: "A multi-module system for funeral service management. Features include equipment tracking, AI-generated tributes, real-time digital signage control, document storage, and live camera streaming. Includes client access portals, logistics tracking, and WhatsApp integration. Currently expanding with real-time slideshow tributes.",
     tags: ["C# .NET", "Angular", "SignalR", "MediaMTX", "RabbitMQ", "MinIO", "OpenAI API", "Docker"],
     link: "#" // No link provided, keeping placeholder or removing
   },
   {
     title: "Event-Driven Receipt System",
+    problem: "Receipts were previously paper-only. The company wanted to modernize by offering digital receipts to clients, requiring a scalable system to handle the transition.",
     description: "Scalable processing system for handling high-volume receipt data. Uses message queues for asynchronous processing and reliability.",
     tags: ["RabbitMQ", "Background Workers", "FastAPI", "Python", "Docker"],
     link: "#"
   },
   {
     title: "SQL Server Optimization & Payment Monitor",
+    problem: "The previous process was painful and inefficient, causing employees to lose time and become frustrated due to critical failures and lack of visibility during high-traffic periods.",
     description: "Optimized database performance to resolve critical failures in the payment monitor during high-traffic periods. Implemented indexing, normalization, and stored procedure tuning to ensure stability and efficiency.",
     tags: ["SQL Server", "Performance Tuning", "Database Normalization", "Stored Procedures", "Monitoring"],
     link: "#"
@@ -30,6 +33,10 @@ const projects = [
         <article class="project-card">
           <div class="project-content">
             <h3>{project.title}</h3>
+            <div class="problem-section">
+              <span class="problem-label">The Challenge</span>
+              <p class="problem-text">{project.problem}</p>
+            </div>
             <p>{project.description}</p>
             <div class="tags">
               {project.tags.map(tag => (
@@ -96,6 +103,31 @@ const projects = [
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #fff;
+  }
+
+  .problem-section {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--color-accent);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .problem-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .problem-text {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    line-height: 1.5;
   }
 
   .project-content p {
