@@ -1,4 +1,13 @@
 ---
+// Logo URLs for certification issuers
+const issuerLogos: Record<string, string> = {
+  "Johns Hopkins University": "https://brand.jhu.edu/assets/uploads/sites/5/2014/06/university.logo_.small_.vertical.blue_.png",
+  "University of California, Irvine": "https://brand.uci.edu/wp-content/uploads/2022/11/UCI-logo-mark.png",
+  "Packt": "https://static.packt-cdn.com/assets/images/favicon.png",
+  "Coursera": "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera.s3.amazonaws.com/media/coursera-logo-square.png",
+  "EF SET": "https://www.efset.org/favicon-32x32.png"
+};
+
 const certs = [
   {
     title: "Linear Algebra: Linear Systems and Matrix Equations",
@@ -60,7 +69,15 @@ const certs = [
         <div class="cert-card">
           <div class="cert-header">
             <h3>{cert.title}</h3>
-            <span class="issuer">{cert.issuer}</span>
+            <div class="issuer-row">
+              <img 
+                src={issuerLogos[cert.issuer]} 
+                alt={`${cert.issuer} logo`} 
+                class="issuer-logo"
+                loading="lazy"
+              />
+              <span class="issuer">{cert.issuer}</span>
+            </div>
           </div>
           <div class="cert-footer">
             <span class="date">{cert.date}</span>
@@ -131,11 +148,26 @@ const certs = [
     line-height: 1.4;
   }
 
+  .issuer-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .issuer-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px;
+    flex-shrink: 0;
+  }
+
   .issuer {
     font-size: 0.9rem;
     color: var(--color-text-muted);
-    display: block;
-    margin-bottom: 1.5rem;
   }
 
   .cert-footer {
