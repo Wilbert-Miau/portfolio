@@ -1,20 +1,37 @@
 ---
+import heroImage from '../assets/images/hero.jpg';
 ---
 
 <section class="hero">
-  <div class="container hero-content">
-    <div class="badge">Available for new opportunities</div>
-    <h1>
-      Backend & Infrastructure <br />
-      <span class="text-accent">Developer</span>
-    </h1>
-    <p class="subtitle">
-      I build systems that save money, run fast, and never go down. 
-      2+ years turning infrastructure into competitive advantage through strategic optimization and event-driven architecture.
-    </p>
-    <div class="cta-group">
-      <a href="#projects" class="btn btn-primary">View Projects</a>
-      <a href="#contact" class="btn btn-secondary">Contact Me</a>
+  <div class="container hero-wrapper">
+    <div class="hero-content">
+      <div class="badge">Available for new opportunities</div>
+      <h1>
+        Backend & Infrastructure <br />
+        <span class="text-accent">Developer</span>
+      </h1>
+      <p class="subtitle">
+        I build systems that save money, run fast, and never go down. 
+        2+ years turning infrastructure into competitive advantage through strategic optimization and event-driven architecture.
+      </p>
+      <div class="cta-group">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+        <a href="/Wilbert-Castillo-Infrastructure-Engineer-Resume.pdf" download class="btn btn-download">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Resume
+        </a>
+      </div>
+    </div>
+    
+    <div class="hero-image">
+      <div class="image-frame">
+        <img src={heroImage.src} alt="Wilbert Castillo" />
+      </div>
     </div>
   </div>
   
@@ -31,10 +48,76 @@
     padding-top: 70px; /* Navbar height */
   }
 
-  .hero-content {
+  .hero-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
     position: relative;
     z-index: 10;
-    max-width: 800px;
+  }
+
+  .hero-content {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .hero-image {
+    flex-shrink: 0;
+  }
+
+  .image-frame {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid var(--color-border);
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(59, 130, 246, 0.1);
+  }
+
+  .image-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--color-accent), transparent 50%, var(--color-accent));
+    z-index: -1;
+    border-radius: 22px;
+    opacity: 0.5;
+  }
+
+  .image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .image-frame:hover img {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 900px) {
+    .hero-wrapper {
+      flex-direction: column-reverse;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .hero-content {
+      max-width: 100%;
+    }
+
+    .image-frame {
+      width: 250px;
+      height: 250px;
+    }
+
+    .cta-group {
+      justify-content: center;
+    }
   }
 
   .badge {
@@ -98,6 +181,22 @@
   .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
+  }
+
+  .btn-download {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    gap: 0.5rem;
+  }
+
+  .btn-download:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .btn-download svg {
+    flex-shrink: 0;
   }
 
   .background-glow {
