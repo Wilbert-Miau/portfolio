@@ -5,10 +5,17 @@ const skills = {
     "MinIO Object Storage",
     "Caddy Reverse Proxy",
     "Self-hosted GitHub Actions",
-    "Linux Servers"
+    "Linux Servers",
+    "VMware vSphere",
+    "Windows Server"
+  ],
+  cloud: [
+    "AWS (CloudFront, S3, EC2)",
+    "Azure Fundamentals",
+    "GCP Basics"
   ],
   realtime: [
-    "Asterisk/Issabel VoIP (PBX)",
+    "Asterisk Manager Interface (AMI)",
     "MediaMTX Streaming",
     "SignalR WebSockets",
     "RabbitMQ Message Broker"
@@ -16,21 +23,20 @@ const skills = {
   backend: [
     "C# .NET APIs",
     "Python / FastAPI",
+    "Go (Golang)",
     "SQL Server Optimization",
-    "Event-Driven Architecture",
-    "Legacy Integration"
+    "Event-Driven Architecture"
   ],
   monitoring: [
     "Sentry Error Tracking",
-    "FortiGate Security",
-    "Samsung Knox MDM"
+    "Grafana Dashboards"
   ],
   management: [
-    "Customer Orientation",
-    "Strategic Planning",
-    "Long-term Vision",
-    "Business Growth",
-    "Team Leadership"
+    "Problem Solving & Root Cause Analysis",
+    "Cross-Functional Collaboration",
+    "Strategic Cost Optimization",
+    "Technical Documentation",
+    "Adaptability"
   ]
 };
 ---
@@ -45,6 +51,16 @@ const skills = {
         <h3>Platform Services</h3>
         <div class="skill-list">
           {skills.platform.map(skill => (
+            <div class="skill-tag">{skill}</div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Cloud & Platform -->
+      <div class="skill-category">
+        <h3>Cloud Platforms</h3>
+        <div class="skill-list">
+          {skills.cloud.map(skill => (
             <div class="skill-tag">{skill}</div>
           ))}
         </div>
