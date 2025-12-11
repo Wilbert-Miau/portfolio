@@ -35,7 +35,7 @@ resource "aws_cloudfront_origin_access_control" "default" {
 resource "aws_acm_certificate" "cert" {
   domain_name       = var.domain_name
   validation_method = "DNS"
-
+  subject_alternative_names = ["www.${var.domain_name}"]
   lifecycle {
     create_before_destroy = true
   }
@@ -77,8 +77,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  aliases             = [var.domain_name] # Associate your custom domain
-
+  aliases             = [var.domain_name, "www.${var.domain_name}"]
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
@@ -143,5 +142,13 @@ resource "cloudflare_record" "root_domain" {
   content = aws_cloudfront_distribution.s3_distribution.domain_name
   type    = "CNAME"
   proxied = false 
+  ttl     = 3600
+}
+resource "cloudflare_record" "www_domain" {
+  zone_id = data.cloudflare_zone.this.id
+  name    = "www"
+  content = aws_cloudfront_distribution.s3_distribution.domain_name
+  type    = "CNAME"
+  proxied = false # Keep as DNS Only for now
   ttl     = 3600
 }
