@@ -5,5 +5,5 @@ variable "cloudflare_api_token" {
 }
 
 variable "domain_name" {
-  default = "wilbertcastillo.com/" 
+  default = "wilbertcastillo.com" 
 }
