@@ -16,28 +16,28 @@ S3 bucket has no public access; content is served exclusively through strict HTT
 ```mermaid
 graph TD
     %% Actors
-    User([👤 Visitor])
-    Dev([👨‍💻 Developer])
+    User(["👤 Visitor"])
+    Dev(["👨‍💻 Developer"])
     
     %% Tools & CI/CD
     subgraph Development ["Development & Automation"]
-        Gemini[✨ Gemini AI <br/>(Assistance)]
-        Repo[GitHub Repository <br/>(Astro Source)]
-        Actions[🚀 GitHub Actions <br/>(CI/CD Pipeline)]
-        TF[🏗️ Terraform <br/>(Infrastructure as Code)]
+        Gemini["✨ Gemini AI <br/>(Assistance)"]
+        Repo["GitHub Repository <br/>(Astro Source)"]
+        Actions["🚀 GitHub Actions <br/>(CI/CD Pipeline)"]
+        TF["🏗️ Terraform <br/>(Infrastructure as Code)"]
     end
 
     %% External DNS
     subgraph DNS ["DNS Layer"]
-        CF[☁️ Cloudflare <br/>(DNS & Validation)]
+        CF["☁️ Cloudflare <br/>(DNS & Validation)"]
     end
 
     %% AWS Cloud
     subgraph AWS ["AWS Cloud Infrastructure"]
-        ACM[🔒 ACM <br/>(SSL Certificate)]
-        CF_Dist[⚡ CloudFront <br/>(Edge CDN)]
-        S3[🗄️ S3 Bucket <br/>(Private Storage)]
-        OAC[🔑 Origin Access Control <br/>(Security)]
+        ACM["🔒 ACM <br/>(SSL Certificate)"]
+        CF_Dist["⚡ CloudFront <br/>(Edge CDN)"]
+        S3["🗄️ S3 Bucket <br/>(Private Storage)"]
+        OAC["🔑 Origin Access Control <br/>(Security)"]
     end
 
     %% Relationships - Development Flow
