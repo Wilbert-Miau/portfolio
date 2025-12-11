@@ -1,5 +1,8 @@
-# portfolio 
+# Portfolio 
+Hi! This is the repo for my personal site.
+<a href="https://www.wilbertcastillo.com/" target="_blank">Portfolio</a>
 
+Considerations:
 Infrastructure as Code: 
 Complete AWS environment (Network, Storage, CDN) provisioned in seconds via Terraform.
 
