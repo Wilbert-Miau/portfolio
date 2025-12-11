@@ -12,11 +12,11 @@ terraform {
   }
 
   # (Optional) Store state in S3 instead of locally on your laptop
-  # backend "s3" {
-  #   bucket = "my-terraform-state-bucket"
-  #   key    = "portfolio/terraform.tfstate"
-  #   region = "us-east-1"
-  # }
+   backend "s3" {
+     bucket = "my-terraform-state-bucket"
+     key    = "portfolio/terraform.tfstate"
+     region = "us-east-1"
+   }
 }
 
 provider "aws" {
