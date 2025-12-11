@@ -1,5 +1,5 @@
 variable "cloudflare_api_token" {
-  description = "Your Cloudflare API Token (Keep this secret!)"
+  description = "Cloudflare API Token"
   type        = string
   sensitive   = true # Hides it from logs
 }
