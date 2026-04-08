@@ -34,8 +34,14 @@ jobs:
 
       - name: Resolve deploy bucket from CloudFront origin
         run: |
+          dist_id="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+          if [ -z "$dist_id" ]; then
+            echo "::error title=Missing secret::CLOUDFRONT_DISTRIBUTION_ID is empty or not set."
+            exit 1
+          fi
+
           origin_domain=$(aws cloudfront get-distribution \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --id "$dist_id" \
             --query 'Distribution.DistributionConfig.Origins.Items[0].DomainName' \
             --output text)
           origin_bucket="${origin_domain%%.s3*}"
