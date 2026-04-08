@@ -35,25 +35,41 @@ jobs:
       - name: Resolve deploy bucket from CloudFront origin
         run: |
           dist_id="${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
-          if [ -z "$dist_id" ]; then
-            echo "::error title=Missing secret::CLOUDFRONT_DISTRIBUTION_ID is empty or not set."
+          configured_bucket="${{ secrets.S3_BUCKET }}"
+          origin_bucket=""
+
+          if [ -n "$dist_id" ]; then
+            set +e
+            origin_domain=$(aws cloudfront get-distribution \
+              --id "$dist_id" \
+              --query 'Distribution.DistributionConfig.Origins.Items[0].DomainName' \
+              --output text 2>/tmp/cf_get_distribution_error.log)
+            cf_status=$?
+            set -e
+
+            if [ "$cf_status" -eq 0 ] && [ -n "$origin_domain" ] && [ "$origin_domain" != "None" ]; then
+              origin_bucket="${origin_domain%%.s3*}"
+              echo "CloudFront origin domain: $origin_domain"
+              echo "CloudFront origin bucket: $origin_bucket"
+            else
+              echo "::warning title=CloudFront lookup skipped::Could not read distribution origin (missing permission or invalid distribution id). Falling back to S3_BUCKET secret."
+            fi
+          else
+            echo "::warning title=Missing CLOUDFRONT_DISTRIBUTION_ID::Falling back to S3_BUCKET secret."
+          fi
+
+          if [ -n "$origin_bucket" ]; then
+            if [ -n "$configured_bucket" ] && [ "$origin_bucket" != "$configured_bucket" ]; then
+              echo "::warning title=S3_BUCKET secret mismatch::CloudFront uses '$origin_bucket' but S3_BUCKET is '$configured_bucket'. Deploying to CloudFront origin bucket."
+            fi
+            echo "DEPLOY_BUCKET=$origin_bucket" >> "$GITHUB_ENV"
+          elif [ -n "$configured_bucket" ]; then
+            echo "DEPLOY_BUCKET=$configured_bucket" >> "$GITHUB_ENV"
+            echo "::warning title=Using S3_BUCKET fallback::Set cloudfront:GetDistribution permission to auto-resolve origin bucket."
+          else
+            echo "::error title=No deploy bucket available::Set S3_BUCKET secret or grant cloudfront:GetDistribution on CLOUDFRONT_DISTRIBUTION_ID."
             exit 1
           fi
-
-          origin_domain=$(aws cloudfront get-distribution \
-            --id "$dist_id" \
-            --query 'Distribution.DistributionConfig.Origins.Items[0].DomainName' \
-            --output text)
-          origin_bucket="${origin_domain%%.s3*}"
-          echo "CloudFront origin domain: $origin_domain"
-          echo "CloudFront origin bucket: $origin_bucket"
-
-          configured_bucket="${{ secrets.S3_BUCKET }}"
-          if [ -n "$configured_bucket" ] && [ "$origin_bucket" != "$configured_bucket" ]; then
-            echo "::warning title=S3_BUCKET secret mismatch::CloudFront uses '$origin_bucket' but S3_BUCKET is '$configured_bucket'. Deploying to CloudFront origin bucket."
-          fi
-
-          echo "DEPLOY_BUCKET=$origin_bucket" >> "$GITHUB_ENV"
 
       - name: Upload to S3
         run: |
