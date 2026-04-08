@@ -1,11 +1,20 @@
 ---
+interface Props {
+  t: {
+    copyrightOwner: string;
+    rights: string;
+    builtWith: string;
+  };
+}
+
+const { t } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
   <div class="container">
-    <p>&copy; {year} Wilbert Enrrique Castillo Nolasco. All rights reserved.</p>
-    <p class="credit">Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a></p>
+    <p>&copy; {year} {t.copyrightOwner}. {t.rights}</p>
+    <p class="credit">{t.builtWith} <a href="https://astro.build" target="_blank" rel="noopener">Astro</a></p>
   </div>
 </footer>
 

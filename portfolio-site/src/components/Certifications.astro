@@ -1,4 +1,13 @@
 ---
+interface Props {
+  t: {
+    sectionTitle: string;
+    verifyCta: string;
+  };
+}
+
+const { t } = Astro.props;
+
 // Logo URLs for certification issuers - using reliable sources
 const issuerLogos: Record<string, string> = {
   "Johns Hopkins University": "https://www.jhu.edu/assets/themes/jhu/assets/images/icons/favicon-32x32.png",
@@ -62,7 +71,7 @@ const certs = [
 
 <section id="certifications" class="section">
   <div class="container">
-    <h2 class="section-title">Certifications</h2>
+    <h2 class="section-title">{t.sectionTitle}</h2>
     
     <div class="certs-grid">
       {certs.map(cert => (
@@ -97,7 +106,7 @@ const certs = [
 
     <div class="cta-container">
       <a href="https://www.linkedin.com/in/wilbert-castillo-nolasco-00a0b9216/details/certifications/" target="_blank" rel="noopener noreferrer" class="btn-linkedin">
-        View More & Verify on LinkedIn
+        {t.verifyCta}
       </a>
     </div>
   </div>

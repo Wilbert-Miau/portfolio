@@ -4,13 +4,18 @@ import '../styles/global.css';
 interface Props {
 	title: string;
 	description?: string;
+	lang?: "en" | "es";
 }
 
-const { title, description = "Portfolio of Wilbert Enrrique Castillo Nolasco - Backend & Infrastructure Developer" } = Astro.props;
+const {
+	title,
+	description = "Portfolio of Wilbert Enrrique Castillo Nolasco - Backend & Infrastructure Developer",
+	lang = "en",
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />

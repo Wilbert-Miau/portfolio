@@ -1,24 +1,36 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Skills from '../components/Skills.astro';
-import Projects from '../components/Projects.astro';
-import Certifications from '../components/Certifications.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Wilbert Castillo | Backend & Infrastructure Developer">
-	<Navbar />
-	<main>
-		<Hero />
-		<About />
-		<Skills />
-		<Projects />
-		<Certifications />
-		<Contact />
-	</main>
-	<Footer />
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting...</title>
+    <script is:inline>
+      (() => {
+        let lang = "en";
+
+        try {
+          const stored = localStorage.getItem("preferredLang");
+          if (stored === "en" || stored === "es") {
+            lang = stored;
+          } else {
+            const browserLang =
+              (navigator.languages && navigator.languages[0]) || navigator.language || "en";
+            lang = browserLang.toLowerCase().startsWith("es") ? "es" : "en";
+          }
+        } catch {
+          lang = "en";
+        }
+
+        const target = `/${lang}/${window.location.search}${window.location.hash}`;
+        window.location.replace(target);
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=/en/" />
+    </noscript>
+  </head>
+  <body></body>
+</html>

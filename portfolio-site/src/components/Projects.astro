@@ -1,56 +1,49 @@
 ---
 import receiptsSystemImg from '../assets/images/receipts-system.svg';
 
-const projects = [
-  {
-    title: "Comprehensive Administrative Platform",
-    problem: "The company needed to shift from simple financial control to generating digital experiences to increase sales. Legacy systems failed to meet specific modern needs, such as real-time management of digital signage.",
-    description: "A multi-module system for funeral service management. Features include equipment tracking, AI-generated tributes, real-time digital signage control, document storage, and live camera streaming. Includes client access portals and WhatsApp integration. Currently expanding with real-time slideshow tributes.",
-    tags: ["C# .NET", "Angular", "SignalR", "MediaMTX", "RabbitMQ", "MinIO", "OpenAI API", "Docker"],
-    link: "#"
-  },
-  {
-    title: "Event-Driven Receipt System",
-    problem: "Receipts were previously paper-only. The company wanted to modernize by offering digital receipts to clients, requiring a scalable system to handle the transition.",
-    description: "Scalable processing system for handling high-volume receipt data. Uses message queues for asynchronous processing and reliability.",
-    tags: ["RabbitMQ", "Background Workers", "FastAPI", "Python", "Docker"],
-    image: receiptsSystemImg,
-    link: "#"
-  },
-  {
-    title: "SQL Server Optimization & Payment Monitor",
-    problem: "The previous process was painful and inefficient, causing employees to lose time and become frustrated due to critical failures and lack of visibility during high-traffic periods.",
-    description: "Optimized database performance to resolve critical failures in the payment monitor during high-traffic periods. Implemented indexing, normalization, and stored procedure tuning to ensure stability and efficiency.",
-    tags: ["SQL Server", "Performance Tuning", "Database Normalization", "Stored Procedures", "Monitoring"],
-    link: "#"
-  }
-];
+interface ProjectItem {
+  title: string;
+  problem: string;
+  description: string;
+  tags: string[];
+  hasImage?: boolean;
+}
+
+interface Props {
+  t: {
+    sectionTitle: string;
+    challengeLabel: string;
+    items: ProjectItem[];
+  };
+}
+
+const { t } = Astro.props;
 ---
 
 <section id="projects" class="section bg-surface">
   <div class="container">
-    <h2 class="section-title">Featured Projects</h2>
-    
+    <h2 class="section-title">{t.sectionTitle}</h2>
+
     <div class="projects-grid">
-      {projects.map(project => (
+      {t.items.map((project) => (
         <article class="project-card">
-          {project.image && (
+          {project.hasImage && (
             <div class="project-image" data-lightbox>
-              <img src={project.image.src} alt={project.title} />
+              <img src={receiptsSystemImg.src} alt={project.title} />
               <div class="image-overlay">
-                <span class="expand-icon">🔍</span>
+                <span class="expand-icon">&#128269;</span>
               </div>
             </div>
           )}
           <div class="project-content">
             <h3>{project.title}</h3>
             <div class="problem-section">
-              <span class="problem-label">The Challenge</span>
+              <span class="problem-label">{t.challengeLabel}</span>
               <p class="problem-text">{project.problem}</p>
             </div>
             <p>{project.description}</p>
             <div class="tags">
-              {project.tags.map(tag => (
+              {project.tags.map((tag) => (
                 <span class="tag">{tag}</span>
               ))}
             </div>
@@ -61,7 +54,6 @@ const projects = [
   </div>
 </section>
 
-<!-- Lightbox Modal -->
 <div id="lightbox-modal" class="lightbox-modal">
   <button class="lightbox-close" aria-label="Close">&times;</button>
   <img class="lightbox-image" src="" alt="" />
@@ -74,7 +66,7 @@ const projects = [
     const closeBtn = modal?.querySelector('.lightbox-close');
     const lightboxTriggers = document.querySelectorAll('[data-lightbox]');
 
-    lightboxTriggers.forEach(trigger => {
+    lightboxTriggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
         const img = trigger.querySelector('img') as HTMLImageElement;
         if (img && modal && modalImg) {
@@ -178,7 +170,6 @@ const projects = [
     transform: scale(1.05);
   }
 
-  /* Lightbox Modal Styles */
   .lightbox-modal {
     position: fixed;
     inset: 0;

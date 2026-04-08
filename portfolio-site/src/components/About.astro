@@ -1,25 +1,30 @@
 ---
+interface Props {
+  t: {
+    sectionTitle: string;
+    lead: string;
+    paragraphs: string[];
+  };
+}
+
+const { t } = Astro.props;
+const [leadAccent, ...leadRestParts] = t.lead.split(".");
+const leadRest = leadRestParts.join(".").trim();
 ---
 
 <section id="about" class="section bg-surface">
   <div class="container">
-    <h2 class="section-title">About Me</h2>
+    <h2 class="section-title">{t.sectionTitle}</h2>
     <div class="content">
       <p class="lead">
-        <span class="text-accent">Engineering Efficiency.</span> Maximizing Value.
+        <span class="text-accent">{leadAccent.trim()}.</span>{leadRest ? ` ${leadRest}` : ""}
       </p>
-      
+
       <div class="bio-grid">
         <div class="bio-text">
-          <p>
-            I turn infrastructure into a competitive advantage.
-          </p>
-          <p>
-            My focus is simple: <strong>cut costs, boost speed, and ensure reliability</strong>. I make strategic infrastructure decisions—whether cloud, hybrid, or self-hosted—based on what delivers the best value. Through SQL Server query monitoring and index optimization, I've slashed production latency by <strong>90%</strong> (700ms to &lt;50ms).
-          </p>
-          <p>
-            I don't just write code—I build scalable solutions that drive profit and stability.
-          </p>
+          {t.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
         </div>
       </div>
     </div>
@@ -60,7 +65,7 @@
     margin-bottom: 1.5rem;
     font-size: 1.1rem;
   }
-  
+
   strong {
     color: #fff;
   }

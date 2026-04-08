@@ -1,11 +1,16 @@
 ---
-const navItems = [
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Certifications', href: '#certifications' },
-  { name: 'Contact', href: '#contact' },
-];
+interface Props {
+  t: {
+    items: Array<{ name: string; href: string }>;
+    toggleMenuAria: string;
+  };
+  switchHref: string;
+  switchText: string;
+  switchLang: "en" | "es";
+  switchAriaLabel: string;
+}
+
+const { t, switchHref, switchText, switchLang, switchAriaLabel } = Astro.props;
 ---
 
 <nav class="navbar">
@@ -14,18 +19,28 @@ const navItems = [
       Wilbert<span class="text-accent">.</span>
     </a>
 
-    <button class="mobile-menu-btn" aria-label="Toggle menu">
+    <button class="mobile-menu-btn" aria-label={t.toggleMenuAria}>
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </button>
 
     <ul class="nav-links">
-      {navItems.map(item => (
+      {t.items.map(item => (
         <li>
           <a href={item.href}>{item.name}</a>
         </li>
       ))}
+      <li>
+        <a
+          class="lang-switch"
+          href={switchHref}
+          hreflang={switchLang}
+          aria-label={switchAriaLabel}
+        >
+          {switchText}
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -68,6 +83,24 @@ const navItems = [
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--color-text-muted);
+  }
+
+  .nav-links .lang-switch {
+    color: #fff;
+    font-weight: 700;
+    border: 1px solid rgba(59, 130, 246, 0.6);
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-links .lang-switch:hover {
+    color: #fff;
+    background: rgba(59, 130, 246, 0.35);
   }
 
   .nav-links a:hover {
@@ -119,8 +152,28 @@ const navItems = [
 <script>
   const mobileBtn = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
+  const langSwitch = document.querySelector('.lang-switch') as HTMLAnchorElement | null;
 
   mobileBtn?.addEventListener('click', () => {
     navLinks?.classList.toggle('active');
+  });
+
+  langSwitch?.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    try {
+      const nextLang = langSwitch.getAttribute('hreflang');
+      if (nextLang === 'en' || nextLang === 'es') {
+        localStorage.setItem('preferredLang', nextLang);
+      }
+    } catch {
+      // Ignore storage errors (private mode / restricted browser policies)
+    }
+
+    const current = new URL(window.location.href);
+    const target = new URL(langSwitch.href, window.location.origin);
+    target.hash = current.hash;
+    target.search = current.search;
+    window.location.href = target.toString();
   });
 </script>

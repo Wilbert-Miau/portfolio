@@ -1,120 +1,37 @@
 ---
-const skills = {
-  platform: [
-    "Docker & Containerization",
-    "MinIO Object Storage",
-    "Caddy Reverse Proxy",
-    "Self-hosted GitHub Actions",
-    "Linux Servers",
-    "VMware vSphere",
-    "Windows Server"
-  ],
-  cloud: [
-    "AWS (CloudFront, S3, EC2,VPC)",
-    "Azure",
-    "GCP (voiceagents)"
-  ],
-  integration: [
-    "Asterisk Manager Interface (AMI)",
-    "MediaMTX Streaming",
-    "SignalR WebSockets",
-    "RabbitMQ Message Broker"
-  ],
-  backend: [
-    "C# .NET APIs",
-    "Python / FastAPI",
-    "Go (Golang)",
-    "SQL Server Optimization",
-    "Event-Driven Architecture"
-  ],
-  monitoring: [
-    "Sentry Error Tracking",
-    "Grafana Dashboards"
-  ],
-  management: [
-    "Problem Solving & Root Cause Analysis",
-    "Cross-Functional Collaboration",
-    "Strategic Cost Optimization",
-    "Technical Documentation",
-    "Adaptability"
-  ]
-};
+interface SkillCategory {
+  title: string;
+  items: string[];
+  highlightCategory?: boolean;
+}
 
-// Skills to highlight with special styling
-const highlightedSkills = [
-  "SQL Server Optimization",
-  "Linux Servers",
-  "C# .NET APIs",
-  "Problem Solving & Root Cause Analysis",
-];
-// Skills to highlight with special styling
-const isHighlighted = (skill: string) => highlightedSkills.includes(skill);
+interface Props {
+  t: {
+    sectionTitle: string;
+    categories: SkillCategory[];
+    highlightedSkills: string[];
+  };
+}
+
+const { t } = Astro.props;
+const isHighlighted = (skill: string) => t.highlightedSkills.includes(skill);
 ---
 
 <section id="skills" class="section">
   <div class="container">
-    <h2 class="section-title">Skills & Expertise</h2>
+    <h2 class="section-title">{t.sectionTitle}</h2>
     
     <div class="skills-grid">
-      <!-- Platform Services -->
-      <div class="skill-category">
-        <h3>Platform Services</h3>
-        <div class="skill-list">
-          {skills.platform.map(skill => (
-            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
-          ))}
+      {t.categories.map((category) => (
+        <div class={`skill-category ${category.highlightCategory ? 'highlight' : ''}`}>
+          <h3>{category.title}</h3>
+          <div class="skill-list">
+            {category.items.map(skill => (
+              <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <!-- Cloud & Platform -->
-      <div class="skill-category">
-        <h3>Cloud Platforms</h3>
-        <div class="skill-list">
-          {skills.cloud.map(skill => (
-            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Streaming & Messaging -->
-      <div class="skill-category">
-        <h3>Streaming & Messaging</h3>
-        <div class="skill-list">
-          {skills.integration.map(skill => (
-            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Backend Development -->
-      <div class="skill-category">
-        <h3>Backend Development</h3>
-        <div class="skill-list">
-          {skills.backend.map(skill => (
-            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Monitoring & Security -->
-      <div class="skill-category">
-        <h3>Monitoring & Security</h3>
-        <div class="skill-list">
-          {skills.monitoring.map(skill => (
-            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Management -->
-      <div class="skill-category highlight">
-        <h3>Management & Soft Skills</h3>
-        <div class="skill-list">
-          {skills.management.map(skill => (
-            <div class={`skill-tag ${isHighlighted(skill) ? 'highlighted' : ''}`}>{skill}</div>
-          ))}
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>

@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Skills from '../../components/Skills.astro';
+import Projects from '../../components/Projects.astro';
+import Certifications from '../../components/Certifications.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import { messages, type Language } from '../../i18n/messages';
+
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const lang: Language = Astro.params.lang === "es" ? "es" : "en";
+const t = messages[lang];
+const switchLang: Language = lang === "en" ? "es" : "en";
+const switchText = switchLang === "es" ? "ES" : "EN";
+const switchAriaLabel =
+  switchLang === "es" ? "Cambiar a español" : "Switch to English";
+---
+
+<Layout title={t.meta.title} description={t.meta.description} lang={lang}>
+  <Navbar
+    t={t.nav}
+    switchHref={`/${switchLang}/`}
+    switchText={switchText}
+    switchLang={switchLang}
+    switchAriaLabel={switchAriaLabel}
+  />
+  <main>
+    <Hero t={t.hero} />
+    <About t={t.about} />
+    <Skills t={t.skills} />
+    <Projects t={t.projects} />
+    <Certifications t={t.certifications} />
+    <Contact t={t.contact} />
+  </main>
+  <Footer t={t.footer} />
+</Layout>
