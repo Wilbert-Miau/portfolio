@@ -30,6 +30,31 @@ resource "aws_cloudfront_origin_access_control" "default" {
   signing_protocol                  = "sigv4"
 }
 
+# Rewrite directory-style routes to index.html so S3 origin can serve Astro static pages.
+# Examples:
+# /      -> /index.html
+# /en/   -> /en/index.html
+# /es    -> /es/index.html
+resource "aws_cloudfront_function" "directory_index_rewrite" {
+  name    = "portfolio-directory-index-rewrite"
+  runtime = "cloudfront-js-1.0"
+  publish = true
+  code    = <<-EOT
+function handler(event) {
+    var request = event.request;
+    var uri = request.uri;
+
+    if (uri.endsWith('/')) {
+        request.uri = uri + 'index.html';
+    } else if (!uri.includes('.')) {
+        request.uri = uri + '/index.html';
+    }
+
+    return request;
+}
+EOT
+}
+
 # --- 4. SSL CERTIFICATE (ACM) ---
 # Request a free certificate from AWS
 resource "aws_acm_certificate" "cert" {
@@ -82,6 +107,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "S3Origin"
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.directory_index_rewrite.arn
+    }
 
     forwarded_values {
       query_string = false
