@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import heroImage from '../assets/images/hero.jpg';
 
 interface Props {
@@ -15,10 +16,29 @@ interface Props {
 
 const { t } = Astro.props;
 const resumeHref = `${import.meta.env.BASE_URL}Wilbert-Castillo-Infrastructure-Engineer-Resume.pdf`;
+const heroWidths = [768, 1280, 1600].filter((width) => width <= heroImage.width);
+
+if (!heroWidths.includes(heroImage.width)) {
+  heroWidths.push(heroImage.width);
+}
 ---
 
-<section class="hero" style={`--hero-bg: url(${heroImage.src})`}>
-  <div class="hero-background"></div>
+<section class="hero">
+  <div class="hero-background" aria-hidden="true">
+    <Picture
+      src={heroImage}
+      alt=""
+      formats={['avif', 'webp']}
+      fallbackFormat="jpg"
+      widths={heroWidths}
+      sizes="100vw"
+      quality={60}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="hero-image"
+    />
+  </div>
   <div class="hero-overlay"></div>
   
   <div class="container hero-content">
@@ -56,11 +76,19 @@ const resumeHref = `${import.meta.env.BASE_URL}Wilbert-Castillo-Infrastructure-E
   .hero-background {
     position: absolute;
     inset: 0;
-    background-image: var(--hero-bg);
-    background-size: cover;
-    background-position: center right;
-    background-repeat: no-repeat;
     z-index: 1;
+  }
+
+  .hero-background :global(picture),
+  .hero-background :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-background :global(img) {
+    object-fit: cover;
+    object-position: center right;
   }
 
   .hero-overlay {
@@ -83,8 +111,8 @@ const resumeHref = `${import.meta.env.BASE_URL}Wilbert-Castillo-Infrastructure-E
   }
 
   @media (max-width: 768px) {
-    .hero-background {
-      background-position: center;
+    .hero-background :global(img) {
+      object-position: center;
     }
 
     .hero-overlay {
