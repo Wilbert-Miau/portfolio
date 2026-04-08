@@ -20,12 +20,13 @@ const switchLang: Language = lang === "en" ? "es" : "en";
 const switchText = switchLang === "es" ? "ES" : "EN";
 const switchAriaLabel =
   switchLang === "es" ? "Cambiar a español" : "Switch to English";
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <Layout title={t.meta.title} description={t.meta.description} lang={lang}>
   <Navbar
     t={t.nav}
-    switchHref={`/${switchLang}/`}
+    switchHref={`${baseUrl}${switchLang}/`}
     switchText={switchText}
     switchLang={switchLang}
     switchAriaLabel={switchAriaLabel}
