@@ -75,12 +75,22 @@ jobs:
         run: |
           aws s3 sync ./portfolio-site/dist s3://${{ env.DEPLOY_BUCKET }} --delete
 
+      - name: Create directory-route objects for S3 REST origin
+        run: |
+          # With private S3 + CloudFront (non-website endpoint), /en/ and /es/ are looked up as object keys.
+          # Create explicit objects so these routes work even without CloudFront URI rewrite.
+          aws s3api put-object --bucket ${{ env.DEPLOY_BUCKET }} --key en/ --body ./portfolio-site/dist/en/index.html --content-type text/html
+          aws s3api put-object --bucket ${{ env.DEPLOY_BUCKET }} --key es/ --body ./portfolio-site/dist/es/index.html --content-type text/html
+
       - name: Verify files in S3
         run: |
           aws s3 ls s3://${{ env.DEPLOY_BUCKET }} --recursive | head -n 50
           aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key index.html > /dev/null
+          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key en/ > /dev/null
           aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key en/index.html > /dev/null
+          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key es/ > /dev/null
           aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key es/index.html > /dev/null
+          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key favicon.ico > /dev/null
           aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key Wilbert-Castillo-Infrastructure-Engineer-Resume.pdf > /dev/null
 
       - name: Invalidate CloudFront Cache
