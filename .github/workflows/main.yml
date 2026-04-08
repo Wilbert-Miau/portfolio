@@ -32,9 +32,34 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Resolve deploy bucket from CloudFront origin
+        run: |
+          origin_domain=$(aws cloudfront get-distribution \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --query 'Distribution.DistributionConfig.Origins.Items[0].DomainName' \
+            --output text)
+          origin_bucket="${origin_domain%%.s3*}"
+          echo "CloudFront origin domain: $origin_domain"
+          echo "CloudFront origin bucket: $origin_bucket"
+
+          configured_bucket="${{ secrets.S3_BUCKET }}"
+          if [ -n "$configured_bucket" ] && [ "$origin_bucket" != "$configured_bucket" ]; then
+            echo "::warning title=S3_BUCKET secret mismatch::CloudFront uses '$origin_bucket' but S3_BUCKET is '$configured_bucket'. Deploying to CloudFront origin bucket."
+          fi
+
+          echo "DEPLOY_BUCKET=$origin_bucket" >> "$GITHUB_ENV"
+
       - name: Upload to S3
         run: |
-          aws s3 sync ./portfolio-site/dist s3://${{ secrets.S3_BUCKET }} --delete --acl private
+          aws s3 sync ./portfolio-site/dist s3://${{ env.DEPLOY_BUCKET }} --delete
+
+      - name: Verify files in S3
+        run: |
+          aws s3 ls s3://${{ env.DEPLOY_BUCKET }} --recursive | head -n 50
+          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key index.html > /dev/null
+          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key en/index.html > /dev/null
+          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key es/index.html > /dev/null
+          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key Wilbert-Castillo-Infrastructure-Engineer-Resume.pdf > /dev/null
 
       - name: Invalidate CloudFront Cache
         run: |
