@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" width="1600" height="800">
+  <title>AE Suite platform architecture — client apps, Caddy edge, k3s/Compose platform, streaming</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3b82f6" />
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#525252" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="800" fill="#0a0a0a" />
+
+  <!-- Font styles -->
+  <style>
+    .title { font: 600 16px 'Inter', 'Segoe UI', sans-serif; fill: #f5f5f5; }
+    .sub   { font: 400 12px 'Inter', 'Segoe UI', sans-serif; fill: #a3a3a3; }
+    .label { font: 600 13px 'Inter', 'Segoe UI', sans-serif; fill: #60a5fa; letter-spacing: 0.04em; }
+    .big   { font: 700 17px 'Inter', 'Segoe UI', sans-serif; fill: #ffffff; }
+    .foot  { font: 400 13px 'Inter', 'Segoe UI', sans-serif; fill: #737373; }
+  </style>
+
+  <!-- Row A: client apps -->
+  <g>
+    <rect x="60" y="40" width="280" height="72" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+    <text x="200" y="70" text-anchor="middle" class="title">Angular Control Center</text>
+    <text x="200" y="90" text-anchor="middle" class="sub">ae-suite-angular</text>
+
+    <rect x="360" y="40" width="280" height="72" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+    <text x="500" y="70" text-anchor="middle" class="title">Svelte Monitor Room</text>
+    <text x="500" y="90" text-anchor="middle" class="sub">monitor-room-svelte</text>
+
+    <rect x="660" y="40" width="280" height="72" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+    <text x="800" y="70" text-anchor="middle" class="title">ae-eventos (public)</text>
+    <text x="800" y="90" text-anchor="middle" class="sub">event signage · viewing rooms</text>
+
+    <rect x="960" y="40" width="280" height="72" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+    <text x="1100" y="70" text-anchor="middle" class="title">Android Logistics</text>
+    <text x="1100" y="90" text-anchor="middle" class="sub">delta sync</text>
+
+    <rect x="1260" y="40" width="280" height="72" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+    <text x="1400" y="70" text-anchor="middle" class="title">Android Sales</text>
+    <text x="1400" y="90" text-anchor="middle" class="sub">idempotent sync</text>
+  </g>
+
+  <!-- Arrows: clients -> Caddy -->
+  <g stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.85">
+    <line x1="200" y1="112" x2="770" y2="168" />
+    <line x1="500" y1="112" x2="785" y2="168" />
+    <line x1="800" y1="112" x2="800" y2="168" />
+    <line x1="1100" y1="112" x2="815" y2="168" />
+    <line x1="1400" y1="112" x2="830" y2="168" />
+  </g>
+
+  <!-- Caddy edge -->
+  <rect x="550" y="170" width="500" height="80" rx="10" fill="#171717" stroke="#3b82f6" stroke-width="2"/>
+  <text x="800" y="203" text-anchor="middle" class="big">Caddy — Reverse Proxy</text>
+  <text x="800" y="224" text-anchor="middle" class="sub">TLS termination · suite.amoreternohn.com · live.amoreternohn.com</text>
+
+  <!-- Arrows: Caddy -> AESuiteApi / MediaMTX -->
+  <g stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)">
+    <line x1="700" y1="250" x2="500" y2="388" />
+    <line x1="900" y1="250" x2="930" y2="388" />
+  </g>
+
+  <!-- Platform outer box -->
+  <rect x="200" y="320" width="1000" height="360" rx="14" fill="#3b82f61a" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="230" y="352" class="label">SELF-HOSTED PLATFORM — k3s + DOCKER COMPOSE</text>
+
+  <!-- AESuiteApi -->
+  <rect x="260" y="390" width="420" height="110" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+  <text x="470" y="424" text-anchor="middle" class="big">AESuiteApi</text>
+  <text x="470" y="446" text-anchor="middle" class="sub">.NET backend — 15+ business modules</text>
+  <text x="470" y="464" text-anchor="middle" class="sub">Sales · HR · Payments · CRM · Memorial · Training</text>
+
+  <!-- MediaMTX -->
+  <rect x="720" y="390" width="420" height="110" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+  <text x="930" y="424" text-anchor="middle" class="big">MediaMTX</text>
+  <text x="930" y="446" text-anchor="middle" class="sub">HLS / WebRTC streaming</text>
+  <text x="930" y="464" text-anchor="middle" class="sub">camera &amp; event playback relay</text>
+
+  <!-- Camera/NVR source -->
+  <rect x="1260" y="405" width="300" height="80" rx="10" fill="#171717" stroke="#404040" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="1410" y="438" text-anchor="middle" class="title">RTSP Cameras / NVR</text>
+  <text x="1410" y="458" text-anchor="middle" class="sub">external stream sources</text>
+  <line x1="1260" y1="445" x2="1140" y2="445" stroke="#525252" stroke-width="1.5" marker-end="url(#arrowMuted)"/>
+
+  <!-- Monitoring -->
+  <rect x="260" y="560" width="420" height="90" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+  <text x="470" y="592" text-anchor="middle" class="title">Monitoring</text>
+  <text x="470" y="612" text-anchor="middle" class="sub">Prometheus · Grafana · cAdvisor</text>
+
+  <!-- Data layer -->
+  <rect x="720" y="560" width="420" height="90" rx="10" fill="#171717" stroke="#262626" stroke-width="1.5"/>
+  <text x="930" y="592" text-anchor="middle" class="title">Data Layer</text>
+  <text x="930" y="612" text-anchor="middle" class="sub">PostgreSQL · Redis</text>
+
+  <!-- Arrows within platform -->
+  <g stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)">
+    <line x1="820" y1="500" x2="880" y2="558" />
+  </g>
+  <g stroke="#525252" stroke-width="1.3" stroke-dasharray="3 4" marker-end="url(#arrowMuted)">
+    <line x1="470" y1="558" x2="470" y2="502" />
+    <line x1="700" y1="558" x2="960" y2="502" />
+  </g>
+  <text x="475" y="540" class="sub" opacity="0.85">metrics</text>
+
+  <!-- Footer -->
+  <text x="800" y="720" text-anchor="middle" class="foot">CI/CD: GitHub Actions → automated k3s deployments (dev + production)</text>
+</svg>

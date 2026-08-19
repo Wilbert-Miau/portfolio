@@ -1,0 +1,104 @@
+---
+interface Section {
+  heading: string;
+  body: string;
+}
+
+interface Props {
+  title: string;
+  summary: string;
+  sections: Section[];
+  backLinkText: string;
+  backHref: string;
+  diagramSrc?: string;
+}
+
+const { title, summary, sections, backLinkText, backHref, diagramSrc } = Astro.props;
+---
+
+<section class="case-study section">
+  <div class="container">
+    <a class="back-link" href={backHref}>{backLinkText}</a>
+    <h1>{title}</h1>
+    <p class="summary">{summary}</p>
+
+    {diagramSrc && (
+      <div class="diagram">
+        <img src={diagramSrc} alt={`${title} architecture diagram`} />
+      </div>
+    )}
+
+    <div class="sections">
+      {sections.map((s) => (
+        <article class="cs-section">
+          <h2>{s.heading}</h2>
+          <p>{s.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .case-study {
+    padding-top: calc(70px + 4rem);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+    max-width: 800px;
+  }
+
+  .summary {
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+    max-width: 760px;
+    margin-bottom: 2.5rem;
+  }
+
+  .diagram {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .diagram img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .sections {
+    max-width: 780px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cs-section h2 {
+    font-size: 1.3rem;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .cs-section p {
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+</style>

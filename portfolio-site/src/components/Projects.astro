@@ -1,5 +1,6 @@
 ---
 import receiptsSystemImg from '../assets/images/receipts-system.svg';
+import platformArchitectureImg from '../assets/images/platform-architecture.svg';
 
 interface ProjectItem {
   title: string;
@@ -7,29 +8,43 @@ interface ProjectItem {
   description: string;
   tags: string[];
   hasImage?: boolean;
+  imageKey?: string;
+  caseStudySlug?: string;
 }
 
 interface Props {
   t: {
     sectionTitle: string;
     challengeLabel: string;
+    disclaimer?: string;
+    readCaseStudy?: string;
     items: ProjectItem[];
   };
+  lang?: string;
+  baseUrl?: string;
 }
 
-const { t } = Astro.props;
+const { t, lang = 'en', baseUrl = '/' } = Astro.props;
+
+const images: Record<string, typeof receiptsSystemImg> = {
+  receipts: receiptsSystemImg,
+  'platform-architecture': platformArchitectureImg,
+};
+
+const imageFor = (project: ProjectItem) => images[project.imageKey ?? 'receipts'];
 ---
 
 <section id="projects" class="section bg-surface">
   <div class="container">
     <h2 class="section-title">{t.sectionTitle}</h2>
+    {t.disclaimer && <p class="projects-disclaimer">{t.disclaimer}</p>}
 
     <div class="projects-grid">
       {t.items.map((project) => (
         <article class="project-card">
           {project.hasImage && (
             <div class="project-image" data-lightbox>
-              <img src={receiptsSystemImg.src} alt={project.title} />
+              <img src={imageFor(project).src} alt={project.title} />
               <div class="image-overlay">
                 <span class="expand-icon">&#128269;</span>
               </div>
@@ -47,6 +62,11 @@ const { t } = Astro.props;
                 <span class="tag">{tag}</span>
               ))}
             </div>
+            {project.caseStudySlug && (
+              <a class="case-study-link" href={`${baseUrl}${lang}/projects/${project.caseStudySlug}/`}>
+                {t.readCaseStudy ?? 'Read the case study →'}
+              </a>
+            )}
           </div>
         </article>
       ))}
@@ -111,6 +131,36 @@ const { t } = Astro.props;
     height: 4px;
     background: var(--color-accent);
     border-radius: 2px;
+  }
+
+  .projects-disclaimer {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 1.5rem 0 2.5rem;
+    max-width: 640px;
+  }
+
+  .case-study-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: flex-start;
+    margin-top: 1.25rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .case-study-link:hover {
+    background: rgba(59, 130, 246, 0.22);
+    border-color: rgba(59, 130, 246, 0.7);
+    color: #fff;
+    transform: translateY(-1px);
   }
 
   .projects-grid {

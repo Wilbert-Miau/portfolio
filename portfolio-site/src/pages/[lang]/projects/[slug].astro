@@ -1,0 +1,53 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import CaseStudy from '../../../components/CaseStudy.astro';
+import Footer from '../../../components/Footer.astro';
+import { messages, type Language } from '../../../i18n/messages';
+import platformArchitectureImg from '../../../assets/images/platform-architecture.svg';
+
+type Slug = 'platform-edge' | 'legacy-erp-modernization';
+
+export function getStaticPaths() {
+  const langs: Language[] = ['en', 'es'];
+  const slugs: Slug[] = ['platform-edge', 'legacy-erp-modernization'];
+  return langs.flatMap((lang) => slugs.map((slug) => ({ params: { lang, slug } })));
+}
+
+const lang: Language = Astro.params.lang === 'es' ? 'es' : 'en';
+const slug = Astro.params.slug as Slug;
+const t = messages[lang];
+const caseStudy = t.caseStudies.items[slug];
+
+const switchLang: Language = lang === 'en' ? 'es' : 'en';
+const switchText = switchLang === 'es' ? 'ES' : 'EN';
+const switchAriaLabel = switchLang === 'es' ? 'Cambiar a español' : 'Switch to English';
+const baseUrl = import.meta.env.BASE_URL;
+
+const diagramImages: Record<string, typeof platformArchitectureImg> = {
+  'platform-architecture': platformArchitectureImg,
+};
+const diagramSrc =
+  'diagram' in caseStudy && caseStudy.diagram ? diagramImages[caseStudy.diagram]?.src : undefined;
+---
+
+<Layout title={`${caseStudy.title} — ${t.meta.title}`} description={caseStudy.summary} lang={lang}>
+  <Navbar
+    t={t.nav}
+    switchHref={`${baseUrl}${switchLang}/projects/${slug}/`}
+    switchText={switchText}
+    switchLang={switchLang}
+    switchAriaLabel={switchAriaLabel}
+  />
+  <main>
+    <CaseStudy
+      title={caseStudy.title}
+      summary={caseStudy.summary}
+      sections={caseStudy.sections}
+      backLinkText={t.caseStudies.backLink}
+      backHref={`${baseUrl}${lang}/#projects`}
+      diagramSrc={diagramSrc}
+    />
+  </main>
+  <Footer t={t.footer} />
+</Layout>
