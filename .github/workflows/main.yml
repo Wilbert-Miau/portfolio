@@ -77,21 +77,38 @@ jobs:
 
       - name: Create directory-route objects for S3 REST origin
         run: |
-          # With private S3 + CloudFront (non-website endpoint), /en/ and /es/ are looked up as object keys.
-          # Create explicit objects so these routes work even without CloudFront URI rewrite.
-          aws s3api put-object --bucket ${{ env.DEPLOY_BUCKET }} --key en/ --body ./portfolio-site/dist/en/index.html --content-type text/html
-          aws s3api put-object --bucket ${{ env.DEPLOY_BUCKET }} --key es/ --body ./portfolio-site/dist/es/index.html --content-type text/html
+          # With private S3 + CloudFront (non-website endpoint), a request for /foo/
+          # is looked up as the literal object key "foo/" — S3 REST origins don't
+          # auto-resolve it to foo/index.html the way a website endpoint or
+          # CloudFront's Default Root Object does (that only covers the exact "/").
+          # Walk every index.html Astro generated and create a matching "<dir>/"
+          # placeholder object so every pretty-URL route works, at any nesting
+          # depth, without needing this list hand-maintained per route.
+          cd ./portfolio-site/dist
+          find . -name index.html | while read -r f; do
+            dir="${f#./}"
+            dir="${dir%index.html}"
+            if [ -n "$dir" ]; then
+              echo "Creating placeholder object: $dir"
+              aws s3api put-object --bucket "${{ env.DEPLOY_BUCKET }}" --key "$dir" --body "$f" --content-type text/html
+            fi
+          done
 
       - name: Verify files in S3
         run: |
           aws s3 ls s3://${{ env.DEPLOY_BUCKET }} --recursive | head -n 50
           aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key index.html > /dev/null
-          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key en/ > /dev/null
-          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key en/index.html > /dev/null
-          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key es/ > /dev/null
-          aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key es/index.html > /dev/null
           aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key favicon.ico > /dev/null
           aws s3api head-object --bucket ${{ env.DEPLOY_BUCKET }} --key Wilbert-Castillo-Infrastructure-Engineer-Resume.pdf > /dev/null
+          cd ./portfolio-site/dist
+          find . -name index.html | while read -r f; do
+            dir="${f#./}"
+            dir="${dir%index.html}"
+            if [ -n "$dir" ]; then
+              aws s3api head-object --bucket "${{ env.DEPLOY_BUCKET }}" --key "$dir" > /dev/null
+              aws s3api head-object --bucket "${{ env.DEPLOY_BUCKET }}" --key "${dir}index.html" > /dev/null
+            fi
+          done
 
       - name: Invalidate CloudFront Cache
         run: |
