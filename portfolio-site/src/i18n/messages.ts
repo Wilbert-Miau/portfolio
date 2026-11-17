@@ -3,9 +3,9 @@ export type Language = "en" | "es";
 export const messages = {
   en: {
     meta: {
-      title: "Wilbert Castillo | Backend & Infrastructure Developer",
+      title: "Wilbert Castillo | Backend & Platform Engineer",
       description:
-        "Portfolio of Wilbert Enrrique Castillo Nolasco - Backend & Infrastructure Developer",
+        "Portfolio of Wilbert Enrrique Castillo Nolasco - Backend & Platform Engineer",
     },
     nav: {
       items: [
@@ -19,10 +19,10 @@ export const messages = {
     },
     hero: {
       badge: "Available for new opportunities",
-      titleTop: "Backend & Infrastructure",
-      titleAccent: "Developer",
+      titleTop: "Backend & Platform",
+      titleAccent: "Engineer",
       subtitle:
-        "I build systems that save money, run fast, and never go down. 2+ years turning infrastructure into competitive advantage through strategic optimization and event-driven architecture.",
+        "I build and support business-critical software. 3+ years working with .NET, SQL Server, and distributed systems.",
       viewProjects: "View Projects",
       contactMe: "Contact Me",
       downloadResume: "Download Resume",
@@ -32,9 +32,9 @@ export const messages = {
       lead: "Engineering Efficiency. Maximizing Value.",
       paragraphs: [
         "I turn infrastructure into a competitive advantage.",
-        "For the past two years, I've been the sole engineer behind Amor Eterno's operations platform — a suite of internal apps, APIs, and self-hosted infrastructure spanning C#, Angular, Kotlin, and Go.",
-        "My focus is simple: cut costs, boost speed, and ensure reliability. I make strategic infrastructure decisions, whether cloud, hybrid, or self-hosted, based on what delivers the best value. Through SQL Server query monitoring and index optimization, I have slashed production latency by 90% (700ms to <50ms), and I'm now leading a SQL Server to PostgreSQL migration to cut licensing costs further.",
-        "I do not just write code. I build scalable solutions that drive profit and stability.",
+        "At Memorial Amor Eterno (April 2024 to August 2026), I built and operated a self-hosted ASP.NET Core platform spanning 15+ business modules and 227 registered accounts.",
+        "I refactored about 10 stored procedures and shared tables and indexes in SQL Server. One key collections query went from about 700 ms to under 50 ms.",
+        "As a software consultant for Enercom, I built a .NET worker to sync projects, inspections, and surveys from Procore to SQL Server. I earned my degree in Administrative Informatics from UNAH in August 2026.",
       ],
     },
     skills: {
@@ -106,7 +106,7 @@ export const messages = {
       sectionTitle: "Featured Projects",
       challengeLabel: "The Challenge",
       disclaimer:
-        "The repositories behind these projects are private, owned by my employer — these are case studies of the work, not linked source code.",
+        "The repositories behind these projects are private, owned by the companies involved — these are case studies of the work, not linked source code.",
       readCaseStudy: "Read the case study →",
       items: [
         {
@@ -114,7 +114,7 @@ export const messages = {
           problem:
             "The company needed to shift from simple financial control to generating digital experiences to increase sales. Legacy systems failed to meet specific modern needs, such as real-time management of digital signage.",
           description:
-            "A multi-module system for funeral service management. Features include equipment tracking, AI-generated tribute text and original songs (OpenAI + Suno), real-time digital signage control, document storage, and live camera streaming. Includes client access portals and WhatsApp integration. Currently expanding with real-time slideshow tributes.",
+            "A multi-module system for funeral service management. Features include equipment tracking, AI-generated tribute text and original songs (OpenAI + Suno), real-time digital signage control, document storage, and live camera streaming. Includes client access portals and WhatsApp integration.",
           tags: [
             "C# .NET",
             "Angular",
@@ -132,8 +132,8 @@ export const messages = {
           problem:
             "Receipts were previously paper-only. The company wanted to modernize by offering digital receipts to clients, requiring a scalable system to handle the transition.",
           description:
-            "Scalable processing system for handling high-volume receipt data. Uses message queues for asynchronous processing and reliability.",
-          tags: ["RabbitMQ", "Background Workers", "FastAPI", "Python", "Docker"],
+            "Built asynchronous receipt processing with RabbitMQ, .NET, and Python/FastAPI to decouple digital delivery from core ERP workflows.",
+          tags: ["RabbitMQ", ".NET", "Background Workers", "FastAPI", "Python", "Docker"],
           hasImage: true,
           imageKey: "receipts",
         },
@@ -156,15 +156,15 @@ export const messages = {
           problem:
             "Field sales reps need to close and print a sale with zero connectivity, with no room for a duplicate or lost sale if the app crashes mid-retry — a different consistency problem than the company's Logistics Android app already solved with a different strategy (delta sync).",
           description:
-            "Native Kotlin/Jetpack Compose sales app, in active development as an offline-first MVP. Shipped so far: Room as the durable local source of truth, encrypted session persistence, and atomic local caching of sales catalogs and device-scoped counters. Next up: an idempotent, single-transaction sync (durable correlation IDs surviving retries and process death) and Bluetooth thermal receipt printing — deliberately a different sync strategy than the Logistics app's ETag-based delta sync, matched to each domain's actual consistency needs.",
-          tags: ["Kotlin", "Jetpack Compose", "Room", "Hilt", "Offline-First", "MVP In Progress"],
+            "Replaced a vendor-locked sales app with a Kotlin and Jetpack Compose client and ASP.NET Core APIs. Designed durable local transactions, queued sync, retries, and idempotency so sellers could complete sales without cell service. Sellers reported completing sales in under five minutes, compared with 30 minutes or more during failures of the previous system.",
+          tags: ["Kotlin", "Jetpack Compose", "Room", "Hilt", "Offline-First", "ASP.NET Core"],
         },
         {
           title: "Self-Hosted Platform Edge & Orchestration",
           problem:
             "A growing family of internal apps needed unified routing, TLS, live camera and event streaming, and observability — without taking on public cloud costs or lock-in.",
           description:
-            "Designed and operate the platform edge for the entire AE Suite: Caddy reverse proxy, k3s manifests and overlays, MediaMTX for HLS/WebRTC streaming, and a Docker Compose monitoring stack (Prometheus, Grafana, cAdvisor, PostgreSQL, Redis), plus backup automation and a CI/CD pipeline with automated k3s deployments.",
+            "Designed and operated the platform edge for the entire AE Suite: Caddy reverse proxy, k3s manifests and overlays, MediaMTX for HLS/WebRTC streaming, and a Docker Compose monitoring stack (Prometheus, Grafana, cAdvisor, PostgreSQL, Redis), plus backup automation and a CI/CD pipeline with automated k3s deployments.",
           tags: [
             "k3s",
             "Caddy",
@@ -210,7 +210,7 @@ export const messages = {
         "platform-edge": {
           title: "Self-Hosted Platform Edge & Orchestration",
           summary:
-            "How I designed and operate the routing, streaming, and observability layer behind Amor Eterno's entire operations platform — without adopting a public cloud.",
+            "How I designed and operated the routing, streaming, and observability layer behind Amor Eterno's entire operations platform — without adopting a public cloud.",
           sections: [
             {
               heading: "The Problem",
@@ -275,9 +275,9 @@ export const messages = {
   },
   es: {
     meta: {
-      title: "Wilbert Castillo | Desarrollador Backend e Infraestructura",
+      title: "Wilbert Castillo | Ingeniero de Backend y Plataforma",
       description:
-        "Portafolio de Wilbert Enrrique Castillo Nolasco - Desarrollador Backend e Infraestructura",
+        "Portafolio de Wilbert Enrrique Castillo Nolasco - Ingeniero de Backend y Plataforma",
     },
     nav: {
       items: [
@@ -291,10 +291,10 @@ export const messages = {
     },
     hero: {
       badge: "Disponible para nuevas oportunidades",
-      titleTop: "Desarrollador de",
-      titleAccent: "Backend e Infraestructura",
+      titleTop: "Ingeniero de",
+      titleAccent: "Backend y Plataforma",
       subtitle:
-        "Construyo sistemas que ahorran dinero, corren rápido y no se caen. Más de 2 años convirtiendo infraestructura en ventaja competitiva con optimización estratégica y arquitectura orientada a eventos.",
+        "Desarrollo y mantengo software crítico para el negocio. Más de 3 años trabajando con .NET, SQL Server y sistemas distribuidos.",
       viewProjects: "Ver proyectos",
       contactMe: "Contáctame",
       downloadResume: "Descargar CV",
@@ -304,9 +304,9 @@ export const messages = {
       lead: "Ingeniería eficiente. Máximo valor.",
       paragraphs: [
         "Convierto infraestructura en una ventaja competitiva.",
-        "Durante los últimos dos años he sido el único ingeniero detrás de la plataforma de operaciones de Amor Eterno — un conjunto de aplicaciones internas, APIs e infraestructura self-hosted que abarca C#, Angular, Kotlin y Go.",
-        "Mi enfoque es simple: reducir costos, aumentar velocidad y asegurar confiabilidad. Tomo decisiones estratégicas de infraestructura, ya sea cloud, híbrida o self-hosted, según lo que entregue mayor valor. Con monitoreo de consultas e indexación en SQL Server, reduje la latencia en producción en 90% (de 700ms a <50ms), y actualmente lidero una migración de SQL Server a PostgreSQL para reducir aún más los costos de licenciamiento.",
-        "No solo escribo código. Construyo soluciones escalables que impulsan rentabilidad y estabilidad.",
+        "En Memorial Amor Eterno (abril de 2024 a agosto de 2026), desarrollé y operé una plataforma autohospedada en ASP.NET Core con más de 15 módulos de negocio y 227 cuentas registradas.",
+        "Refactoricé unos 10 procedimientos almacenados y tablas e índices compartidos en SQL Server. Una consulta clave de cobros pasó de unos 700 ms a menos de 50 ms.",
+        "Como consultor de software en Enercom, desarrollé un servicio en .NET para sincronizar proyectos, inspecciones y encuestas de Procore con SQL Server. Recibí mi título en Informática Administrativa de la UNAH en agosto de 2026.",
       ],
     },
     skills: {
@@ -378,7 +378,7 @@ export const messages = {
       sectionTitle: "Proyectos destacados",
       challengeLabel: "El desafío",
       disclaimer:
-        "Los repositorios detrás de estos proyectos son privados, propiedad de mi empleador — estas son reseñas del trabajo realizado, no código fuente enlazado.",
+        "Los repositorios detrás de estos proyectos son privados, propiedad de las empresas correspondientes — estas son reseñas del trabajo realizado, no código fuente enlazado.",
       readCaseStudy: "Leer el caso de estudio →",
       items: [
         {
@@ -386,7 +386,7 @@ export const messages = {
           problem:
             "La empresa necesitaba pasar de un control financiero simple a experiencias digitales que impulsaran ventas. Los sistemas legacy no cubrían necesidades modernas como gestión en tiempo real de señalización digital.",
           description:
-            "Sistema modular para gestión de servicios funerarios. Incluye control de equipos, homenajes con texto y canciones originales generados por IA (OpenAI + Suno), señalización digital en tiempo real, almacenamiento documental y streaming en vivo. También incorpora portales para clientes e integración con WhatsApp. Actualmente en expansión con slideshow de homenajes en tiempo real.",
+            "Sistema modular para gestión de servicios funerarios. Incluye control de equipos, homenajes con texto y canciones originales generados por IA (OpenAI + Suno), señalización digital en tiempo real, almacenamiento documental y streaming en vivo. También incorpora portales para clientes e integración con WhatsApp.",
           tags: [
             "C# .NET",
             "Angular",
@@ -404,8 +404,8 @@ export const messages = {
           problem:
             "Antes, los recibos eran solo en papel. La empresa quería modernizarse ofreciendo recibos digitales, lo que requería un sistema escalable para soportar la transición.",
           description:
-            "Sistema escalable para procesar alto volumen de datos de recibos. Usa colas de mensajes para procesamiento asíncrono y mayor confiabilidad.",
-          tags: ["RabbitMQ", "Background Workers", "FastAPI", "Python", "Docker"],
+            "Implementé un flujo asíncrono de recibos con RabbitMQ, .NET y Python/FastAPI para desacoplar la entrega digital de la operación del ERP.",
+          tags: ["RabbitMQ", ".NET", "Background Workers", "FastAPI", "Python", "Docker"],
           hasImage: true,
           imageKey: "receipts",
         },
@@ -428,15 +428,15 @@ export const messages = {
           problem:
             "Los vendedores de campo necesitan cerrar e imprimir una venta sin conectividad, sin riesgo de duplicar o perder la venta si la app falla a mitad de un reintento — un problema de consistencia distinto al que ya resolvió la app Android de Logística de la empresa con una estrategia diferente (delta sync).",
           description:
-            "App nativa en Kotlin/Jetpack Compose para ventas, en desarrollo activo como un MVP offline-first. Entregado hasta ahora: Room como fuente de verdad local durable, persistencia de sesión cifrada, y cacheo local atómico de catálogos de ventas y contadores por dispositivo. Lo siguiente: una sincronización idempotente de transacción única (IDs de correlación durables que sobreviven reintentos y cierres del proceso) e impresión de recibos térmicos por Bluetooth — una estrategia de sincronización deliberadamente distinta a la delta sync basada en ETag de la app de Logística, cada una ajustada a las necesidades reales de consistencia de su dominio.",
-          tags: ["Kotlin", "Jetpack Compose", "Room", "Hilt", "Offline-First", "MVP In Progress"],
+            "Reemplacé la app de ventas del proveedor con un cliente en Kotlin y Jetpack Compose y APIs en ASP.NET Core. Diseñé transacciones locales persistentes, sincronización en cola, reintentos e idempotencia para que los vendedores pudieran completar ventas sin señal. Según los vendedores, completaban ventas en menos de cinco minutos, frente a 30 minutos o más durante fallas del sistema anterior.",
+          tags: ["Kotlin", "Jetpack Compose", "Room", "Hilt", "Offline-First", "ASP.NET Core"],
         },
         {
           title: "Edge y orquestación de plataforma self-hosted",
           problem:
             "Una familia creciente de aplicaciones internas necesitaba enrutamiento unificado, TLS, streaming de cámaras y eventos en vivo, y observabilidad — sin asumir los costos o el lock-in de la nube pública.",
           description:
-            "Diseño y opero el edge de la plataforma para todo AE Suite: proxy reverso Caddy, manifiestos y overlays de k3s, MediaMTX para streaming HLS/WebRTC, y un stack de monitoreo con Docker Compose (Prometheus, Grafana, cAdvisor, PostgreSQL, Redis), además de automatización de backups y un pipeline de CI/CD con despliegues automáticos a k3s.",
+            "Diseñé y operé el edge de la plataforma para todo AE Suite: proxy reverso Caddy, manifiestos y overlays de k3s, MediaMTX para streaming HLS/WebRTC, y un stack de monitoreo con Docker Compose (Prometheus, Grafana, cAdvisor, PostgreSQL, Redis), además de automatización de backups y un pipeline de CI/CD con despliegues automáticos a k3s.",
           tags: [
             "k3s",
             "Caddy",
@@ -482,7 +482,7 @@ export const messages = {
         "platform-edge": {
           title: "Edge y orquestación de plataforma self-hosted",
           summary:
-            "Cómo diseño y opero la capa de enrutamiento, streaming y observabilidad detrás de toda la plataforma de operaciones de Amor Eterno — sin depender de una nube pública.",
+            "Cómo diseñé y operé la capa de enrutamiento, streaming y observabilidad detrás de toda la plataforma de operaciones de Amor Eterno — sin depender de una nube pública.",
           sections: [
             {
               heading: "El problema",
