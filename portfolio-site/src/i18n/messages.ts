@@ -3,15 +3,16 @@ export type Language = "en" | "es";
 export const messages = {
   en: {
     meta: {
-      title: "Wilbert Castillo | Backend & Platform Engineer",
+      title: "Wilbert Castillo | Software Engineer & Entrepreneur",
       description:
-        "Portfolio of Wilbert Enrrique Castillo Nolasco - Backend & Platform Engineer",
+        "Honduran software engineer and entrepreneur focused on software, business operations, and long-term value creation.",
     },
     nav: {
       items: [
         { name: "About", href: "#about" },
-        { name: "Skills", href: "#skills" },
+        { name: "Engineering", href: "#skills" },
         { name: "Projects", href: "#projects" },
+        { name: "Business", href: "#business" },
         { name: "Certifications", href: "#certifications" },
         { name: "Contact", href: "#contact" },
       ],
@@ -19,10 +20,10 @@ export const messages = {
     },
     hero: {
       badge: "Available for new opportunities",
-      titleTop: "Backend & Platform",
-      titleAccent: "Engineer",
+      titleTop: "Software Engineer",
+      titleAccent: "& Entrepreneur",
       subtitle:
-        "I build and support business-critical software. 3+ years working with .NET, SQL Server, and distributed systems.",
+        "I build business-critical software and help modernize a retail business in Honduras. My technical focus is backend and platform engineering, with 3+ years of experience in .NET, SQL Server, and distributed systems.",
       viewProjects: "View Projects",
       contactMe: "Contact Me",
       downloadResume: "Download Resume",
@@ -31,11 +32,26 @@ export const messages = {
       sectionTitle: "About Me",
       lead: "Engineering Efficiency. Maximizing Value.",
       paragraphs: [
-        "I turn infrastructure into a competitive advantage.",
+        "I combine software engineering and hands-on retail operations, with a focus on technology, business development, and long-term value creation.",
         "At Memorial Amor Eterno (April 2024 to August 2026), I built and operated a self-hosted ASP.NET Core platform spanning 15+ business modules and 227 registered accounts.",
         "I refactored about 10 stored procedures and shared tables and indexes in SQL Server. One key collections query went from about 700 ms to under 50 ms.",
         "As a software consultant for Enercom, I built a .NET worker to sync projects, inspections, and surveys from Procore to SQL Server. I earned my degree in Administrative Informatics from UNAH in August 2026.",
       ],
+    },
+    business: {
+      sectionTitle: "Business",
+      name: "La Fronteriza",
+      location: "Colomoncagua, Honduras",
+      timeline: "2017–2022 · Returned to operations in 2026",
+      description: "A small family-owned hardware store supplying tools, building materials, and hardware products. I am working to modernize its operations and develop the business sustainably.",
+      focusTitle: "Current areas of work",
+      focus: [
+        "Inventory and point-of-sale digitization with ERPNext",
+        "Supplier relationships, purchasing, and pricing",
+        "Retail operations and customer service",
+        "Evaluating new product lines and growth opportunities",
+      ],
+      status: "Modernization and development in progress",
     },
     skills: {
       sectionTitle: "Skills & Expertise",
@@ -263,7 +279,7 @@ export const messages = {
     contact: {
       sectionTitle: "Get In Touch",
       description:
-        "I am always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out.",
+        "I welcome conversations about software engineering roles, technology consulting, business collaborations, commercial partnerships, and new projects. Feel free to get in touch.",
       linkedin: "LinkedIn",
       github: "GitHub",
     },
@@ -275,15 +291,16 @@ export const messages = {
   },
   es: {
     meta: {
-      title: "Wilbert Castillo | Ingeniero de Backend y Plataforma",
+      title: "Wilbert Castillo | Ingeniero de software y empresario",
       description:
-        "Portafolio de Wilbert Enrrique Castillo Nolasco - Ingeniero de Backend y Plataforma",
+        "Profesional hondureño de software y empresario enfocado en tecnología, operaciones comerciales y creación de valor a largo plazo.",
     },
     nav: {
       items: [
         { name: "Sobre mí", href: "#about" },
-        { name: "Habilidades", href: "#skills" },
+        { name: "Ingeniería", href: "#skills" },
         { name: "Proyectos", href: "#projects" },
+        { name: "Negocios", href: "#business" },
         { name: "Certificaciones", href: "#certifications" },
         { name: "Contacto", href: "#contact" },
       ],
@@ -291,10 +308,10 @@ export const messages = {
     },
     hero: {
       badge: "Disponible para nuevas oportunidades",
-      titleTop: "Ingeniero de",
-      titleAccent: "Backend y Plataforma",
+      titleTop: "Ingeniero de software",
+      titleAccent: "y empresario",
       subtitle:
-        "Desarrollo y mantengo software crítico para el negocio. Más de 3 años trabajando con .NET, SQL Server y sistemas distribuidos.",
+        "Desarrollo software crítico para empresas y trabajo en la modernización de un negocio comercial en Honduras. Me especializo en backend e infraestructura de plataformas, con más de 3 años de experiencia en .NET, SQL Server y sistemas distribuidos.",
       viewProjects: "Ver proyectos",
       contactMe: "Contáctame",
       downloadResume: "Descargar CV",
@@ -303,11 +320,26 @@ export const messages = {
       sectionTitle: "Sobre mí",
       lead: "Ingeniería eficiente. Máximo valor.",
       paragraphs: [
-        "Convierto infraestructura en una ventaja competitiva.",
+        "Combino la ingeniería de software con la experiencia directa en operaciones comerciales, con un enfoque en tecnología, desarrollo empresarial y creación de valor a largo plazo.",
         "En Memorial Amor Eterno (abril de 2024 a agosto de 2026), desarrollé y operé una plataforma autohospedada en ASP.NET Core con más de 15 módulos de negocio y 227 cuentas registradas.",
         "Refactoricé unos 10 procedimientos almacenados y tablas e índices compartidos en SQL Server. Una consulta clave de cobros pasó de unos 700 ms a menos de 50 ms.",
         "Como consultor de software en Enercom, desarrollé un servicio en .NET para sincronizar proyectos, inspecciones y encuestas de Procore con SQL Server. Recibí mi título en Informática Administrativa de la UNAH en agosto de 2026.",
       ],
+    },
+    business: {
+      sectionTitle: "Negocios",
+      name: "La Fronteriza",
+      location: "Colomoncagua, Honduras",
+      timeline: "2017–2022 · Retomé la operación en 2026",
+      description: "Una pequeña ferretería familiar dedicada a la venta de herramientas, materiales de construcción y suministros ferreteros. Trabajo en la modernización de sus operaciones y en su desarrollo sostenible.",
+      focusTitle: "Áreas de trabajo actuales",
+      focus: [
+        "Digitalización de inventarios y punto de venta con ERPNext",
+        "Relaciones con proveedores, compras y precios",
+        "Operaciones comerciales y atención al cliente",
+        "Evaluación de nuevas líneas de productos y oportunidades de crecimiento",
+      ],
+      status: "Modernización y desarrollo en curso",
     },
     skills: {
       sectionTitle: "Habilidades y experiencia",
@@ -535,7 +567,7 @@ export const messages = {
     contact: {
       sectionTitle: "Hablemos",
       description:
-        "Siempre me interesa conocer nuevos proyectos y oportunidades. Si tienes una pregunta o solo quieres saludar, escríbeme.",
+        "Me interesa conversar sobre oportunidades laborales en ingeniería de software, consultoría tecnológica, colaboraciones empresariales, alianzas comerciales y nuevos proyectos. No dudes en contactarme.",
       linkedin: "LinkedIn",
       github: "GitHub",
     },
